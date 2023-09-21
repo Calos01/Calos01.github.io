@@ -1,3 +1,8 @@
+html{
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
 body {
   background-color: #000;
   margin: 0;
@@ -6,6 +11,8 @@ body {
   display: flex;
   align-items: center; /* Centra verticalmente los elementos en el cuerpo */
   justify-content: center; /* Centra horizontalmente los elementos en el cuerpo */
+  
+  /* overflow: hidden; */
 }
 .flower {
   height: 200px;
@@ -20,7 +27,7 @@ body {
   background-color: #000; /* Fondo negro para toda la página */
 
   /* Agrega una animación de pulsación */ 
-  animation: pulsate 2s infinite;
+  animation: pulsate 2.5s infinite;
 }
 
 .text-above,
@@ -143,4 +150,70 @@ body {
   }
   .Petal3.p4 {
     transform: rotate(157.5deg);
+  }
+
+
+  #butterfly {
+    width: 50px;
+    height: 50px;
+    background-image: url('images/blueyuu.png'); /* Imagen de la mariposa */
+    background-size: cover;
+    position: absolute;
+  }
+
+  .rain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+  }
+  
+  .dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  
+  @keyframes rain-animation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.7;
+    }
+  }
+
+  .sparkle {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 50%;
+    animation: sparkle-animation 2s ease-out;
+  }
+  
+  @keyframes sparkle-animation {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .glow-text {
+    margin-right: 0px;
+    justify-self: end;
+    text-align: left;
+    margin-top: 25em;
+    font-size: 2em;
+    font-weight: bold;
+    color: #f39c12; /* Color del texto */
+    text-shadow: 0 0 10px #f39c12; /* Brillo del texto */
   }
