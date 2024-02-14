@@ -18,6 +18,7 @@ body {
   height: 200px;
   width: 200px;
   margin: 20px auto;
+  margin-left: 90px;
 
   display: flex;
   align-items: center;
