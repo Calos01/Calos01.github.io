@@ -1,0 +1,322 @@
+html{
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+body {
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Asegura que el cuerpo ocupe toda la altura de la ventana */
+  display: flex;
+  align-items: center; /* Centra verticalmente los elementos en el cuerpo */
+  justify-content: center; /* Centra horizontalmente los elementos en el cuerpo */
+  
+  /* overflow: hidden; */
+}
+.flower {
+  height: 200px;
+  width: 200px;
+  margin: 20px auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  background-color: #000; /* Fondo negro para toda la página */
+
+  /* Agrega una animación de pulsación */ 
+  animation: pulsate 2.5s infinite;
+}
+
+.text-above,
+.text-below {
+    position: absolute;
+    text-align: center;
+    color: #fff; /* Color del texto */
+    font-size: 25px; /* Tamaño del texto */
+}
+
+.text-above {
+    top: -60px; /* Ajusta la posición vertical del texto arriba de la flor */
+      font-family: 'Lovers Quarrel', cursive; /* Cambiar la fuente */
+      font-size: 24px; /* Ajustar el tamaño del texto */
+      color: #ff4d88; /* Cambiar el color del texto */
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* Agregar efecto de sombra */
+      letter-spacing: 1px; /* Ajustar el espaciado entre letras */
+
+}
+
+.text-below {
+    bottom: -60px; /* Ajusta la posición vertical del texto debajo de la flor */
+}
+@keyframes pulsate {
+  0% {
+      transform: scale(1.5);
+  }
+  50% {
+      transform: scale(1.6);
+  }
+  100% {
+      transform: scale(1.5);
+  }
+}
+  .mid {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    
+    background: radial-gradient(circle, #f007d5, #ff5e00, #000);
+  
+    z-index: 4;
+  
+    background-size: 5px 5px;
+  
+    filter: drop-shadow(0 0 8px #682600);
+  }
+  
+  .Petal1 {
+    position: absolute;
+    left: 40px;
+    z-index: 3;
+  
+    width: 120px;
+    height: 30px;
+    border-radius: 50%;
+  
+    background: radial-gradient(circle at 10% 20%, #ff5599, #ff5599); /* Gradiente de color para simular pétalos de rosa */
+  
+    filter: drop-shadow(0 0 5px #e05200);
+  }
+  
+  .Petal1.p1 {
+    transform: rotate(22.5deg);
+  }
+  .Petal1.p2 {
+    transform: rotate(67.5deg);
+  }
+  .Petal1.p3 {
+    transform: rotate(110.5deg);
+  }
+  .Petal1.p4 {
+    transform: rotate(157.5deg);
+  }
+  
+  .Petal2 {
+    position: absolute;
+    left: 0;
+    z-index: 2;
+  
+    width: 200px;
+    height: 40px;
+    border-radius: 50%;
+  
+    background: radial-gradient(circle at 10% 20%, #ff00bb,#ff00bb);
+  
+    filter: drop-shadow(0 0 5px #e05200);
+  }
+  
+  .Petal2.p1 {
+  }
+  
+  .Petal2.p2 {
+    transform: rotate(90deg);
+  }
+  .Petal2.p3 {
+    transform: rotate(45deg);
+  }
+  
+  .Petal2.p4 {
+    transform: rotate(135deg);
+  }
+  
+  .Petal3 {
+    position: absolute;
+    left: 0px;
+    z-index: 1;
+  
+    width: 200px;
+    height: 40px;
+    border-radius: 50%;
+  
+    background: radial-gradient(circle, #ff0000, #fb0287);
+  
+    filter: drop-shadow(0 0 2px #fbd702);
+  }
+  
+  .Petal3.p1 {
+    transform: rotate(22.5deg);
+  }
+  .Petal3.p2 {
+    transform: rotate(67.5deg);
+  }
+  .Petal3.p3 {
+    transform: rotate(110.5deg);
+  }
+  .Petal3.p4 {
+    transform: rotate(157.5deg);
+  }
+
+
+  #butterfly {
+    width: 50px;
+    height: 50px;
+    background-image: url('images/blueyuu.png'); /* Imagen de la mariposa */
+    background-size: cover;
+    position: absolute;
+  }
+
+  .rain {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+  }
+  
+  .dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+  
+  @keyframes rain-animation {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 0.7;
+    }
+  }
+
+  .sparkle {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 50%;
+    animation: sparkle-animation 2s ease-out;
+  }
+  
+  @keyframes sparkle-animation {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .glow-text {
+    margin-right: 0px;
+    justify-self: end;
+    text-align: left;
+    margin-top: 15em;
+    font-size: 2em;
+    font-weight: bold;
+    color: #f39c12; /* Color del texto */
+    text-shadow: 0 0 10px #f39c12; /* Brillo del texto */
+  }
+  .petal {
+    width: 20px;
+    height: 40px;
+    background-color: #ff00ff; /* Color de los pétalos */
+    position: absolute;
+    top: -40px; /* Posición inicial por encima de la pantalla */
+    border-radius: 50%;
+    background: radial-gradient(circle at 10% 20%, #ff00ff, #ff99cc); /* Gradiente de color para simular pétalos de rosa */
+  }
+  @keyframes fall {
+    0% {
+      top: -10px; /* Posición inicial por encima de la pantalla */
+      opacity: 1;
+    }
+    100% {
+      top: 100vh; /* Posición final por debajo de la pantalla */
+      opacity: 0;
+    }
+  }
+
+  .flowerrosa {
+    width: 200px;
+    height: 200px;
+    position: relative;
+  }
+  
+  .center {
+    width: 50px;
+    height: 50px;
+    background-color: #ffc0cb; /* Color del centro de la flor (rosa) */
+    border-radius: 50%;
+    position: absolute;
+    top: 75px;
+    left: 75px;
+    z-index: 1;
+  }
+  
+  .petals {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+  }
+  
+  .petals div {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    animation: fallingPetal 5s linear infinite;
+  }
+  
+  @keyframes fallingPetal {
+    0% {
+      transform: translateY(-200px) rotate(0deg);
+    }
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+    }
+  }
+  
+  .petals div:nth-child(1) {
+    background-color: #ff1493; /* Color de los pétalos (rosa oscuro) */
+    animation-delay: 0s;
+  }
+  
+  .petals div:nth-child(2) {
+    background-color: #ffc0cb; /* Color de los pétalos (rosa claro) */
+    animation-delay: 1s;
+  }
+  
+  .petals div:nth-child(3) {
+    background-color: #ff1493; /* Color de los pétalos (rosa oscuro) */
+    animation-delay: 2s;
+  }
+  
+  .petals div:nth-child(4) {
+    background-color: #ffc0cb; /* Color de los pétalos (rosa claro) */
+    animation-delay: 3s;
+  }
+  
+  .petals div:nth-child(5) {
+    background-color: #ff1493; /* Color de los pétalos (rosa oscuro) */
+    animation-delay: 4s;
+  }
+  
+  .petals div:nth-child(6) {
+    background-color: #ffc0cb; /* Color de los pétalos (rosa claro) */
+    animation-delay: 5s;
+  }
+
+  #imagen-clickable {
+    cursor: pointer; /* Cambia el cursor cuando se coloca sobre la imagen */
+    position: relative; /* Asegura que la posición sea relativa para permitir z-index */
+    z-index: 999; /* Ajusta el índice z para que la imagen esté por encima de otros elementos */
+    /* Agrega estilos adicionales según sea necesario */
+  }
+
