@@ -129,7 +129,7 @@ class UI {
     bgSoundManager.pauseAllSounds()
     add([rect(1280, 720), color(0, 0, 0)])
     add([
-      text("Game Over!", { size: 50, font: "Round" }),
+      text("Ya Perdiste pue! Jaja No te rindas", { size: 50, font: "Round" }),
       area(),
       anchor("center"),
       pos(center()),
@@ -150,14 +150,14 @@ class UI {
     bgSoundManager.pauseAllSounds()
     add([rect(1280, 720), color(0, 0, 0)])
     add([
-      text("You Won! Thanks for Playing.", { size: 50, font: "Round" }),
+      text("Ganaste Yuu! Ahora si pidele tu deseo \nal joven Carlos y dile que no se haga al \nloco aunque ya esta loco jajaja.", { size: 40, font: "Round" }),
       area(),
       anchor("center"),
       pos(center()),
     ])
 
     this.displayBlinkingUIMessage(
-      "Press [ Enter ] to Play Again",
+      "Hecho con amor y cariño <3 por CarlitosDev XD",
       vec2(center().x, center().y + 100)
     )
 
