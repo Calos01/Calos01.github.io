@@ -157,7 +157,7 @@ class UI {
     ])
 
     this.displayBlinkingUIMessage(
-      "Hecho con amor y cariño <3 por CarlitosDev XD",
+      "Hecho con amor y cariño <3 por CarlitosDev XD para Judith",
       vec2(center().x, center().y + 100)
     )
 
