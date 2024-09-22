@@ -25,7 +25,7 @@
         .text {
           position: absolute;
           color: #FF4081; /* Pink color similar to the Bravo! image */
-          font-size: 30px; /* Adjust size as needed */
+          font-size: 25px; /* Adjust size as needed */
           font-family: 'Pacifico', cursive; /* A playful font like 'Lobster', but closer to 'Bravo!' */
           text-shadow: 4px 4px 10px #39E8FB, 4px 4px 20px #FF4081; /* Create a similar shadow with layered colors */
           display: none;
@@ -34,7 +34,7 @@
         .textcanta {
           position: absolute;
           color: #ffc857; /* Pink color similar to the Bravo! image */
-          font-size: 30px; /* Adjust size as needed */
+          font-size: 25px; /* Adjust size as needed */
           font-family: 'Pacifico', cursive; /* A playful font like 'Lobster', but closer to 'Bravo!' */
           text-shadow: 4px 4px 10px #39E8FB, 4px 4px 20px #FF4081; /* Create a similar shadow with layered colors */
           display: none;
@@ -43,7 +43,7 @@
         .textviaja {
           position: absolute;
           color: #8ac926; /* Pink color similar to the Bravo! image */
-          font-size: 30px; /* Adjust size as needed */
+          font-size: 25px; /* Adjust size as needed */
           font-family: 'Pacifico', cursive; /* A playful font like 'Lobster', but closer to 'Bravo!' */
           text-shadow: 4px 4px 10px #39E8FB, 4px 4px 20px #FF4081; /* Create a similar shadow with layered colors */
           display: none;
@@ -52,7 +52,7 @@
         .textsuenia {
           position: absolute;
           color: #00bbf9; /* Pink color similar to the Bravo! image */
-          font-size: 30px; /* Adjust size as needed */
+          font-size: 25px; /* Adjust size as needed */
           font-family: 'Pacifico', cursive; /* A playful font like 'Lobster', but closer to 'Bravo!' */
           text-shadow: 4px 4px 10px #39E8FB, 4px 4px 20px #FF4081; /* Create a similar shadow with layered colors */
           display: none;
@@ -61,7 +61,7 @@
         .textfeliz {
           position: absolute;
           color: #ffa200; /* Pink color similar to the Bravo! image */
-          font-size: 35px; /* Adjust size as needed */
+          font-size: 30px; /* Adjust size as needed */
           font-family: 'Pacifico', cursive; /* A playful font like 'Lobster', but closer to 'Bravo!' */
           text-shadow: 4px 4px 10px #39E8FB, 4px 4px 20px #FF4081; /* Create a similar shadow with layered colors */
           display: none;
@@ -71,7 +71,7 @@
         #yuu-title {
           position: absolute;
           color: #fff;
-          font-size: 40px;
+          font-size: 35px;
           font-family: 'Pacifico', cursive;
           text-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500, 0 0 30px #FFFF00;
           letter-spacing: 8px;
@@ -80,6 +80,19 @@
           transform: translateX(-50%);
           display: none;
         }
+        #yuu-titlex {
+            position: absolute;
+            color: #fff;
+            font-size: 35px;
+            font-family: 'Pacifico', cursive;
+            text-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500, 0 0 30px #FFFF00;
+            letter-spacing: 8px;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: none;
+            text-align: center;
+          }
     </style>
 </head>
 <body>
@@ -89,7 +102,8 @@
     <div id="text-viaja" class="textviaja">Viaja</div>
     <div id="text-suenia" class="textsuenia">Sueña</div>
     <div id="text-feliz" class="textfeliz">Y Sé Feliz :)</div>
-    <div id="yuu-title">Yuu 🤗XD</div>
+    <div id="yuu-title">Yuu 🤗</div>
+    <div id="yuu-titlex">XD</div>
 
     <script>
         const canvas = document.getElementById('canvas');
@@ -111,6 +125,7 @@
         const arrivalDelays = [3000, 4500, 6000, 6500, 13000]; // Tiempos de llegada en milisegundos
         let textShown = false;
         let yuuShown = false;
+        let yuuShownxd = false;
 
         let talloHeight = 0;
         const maxTalloHeight = canvas.height * 0.5; // Altura máxima del tallo principal
@@ -252,11 +267,11 @@
         function showText(index) {
             const texts = ['text-rie', 'text-canta', 'text-viaja', 'text-suenia', 'text-feliz'];
             const positions = [
-                { left: (canvas.width / 2 - 200) + 'px', top: (canvas.height - branchPositions[0].y - 100) + 'px' }, // Ríe
-                { right: (canvas.width / 2 - 220) + 'px', top: (canvas.height - branchPositions[0].y - 100) + 'px' }, // Canta
-                { left: (canvas.width / 2 - 210) + 'px', bottom: (canvas.height - branchPositions[0].y - 230) + 'px' }, // Viaja
-                { right: (canvas.width / 2 - 220) + 'px', bottom: (canvas.height - branchPositions[0].y - 230) + 'px' }, // Sueña
-                { left: (canvas.width / 2 - 100) + 'px', bottom: (canvas.height - branchPositions[0].y - 120) + 'px' }  // Y Sé Feliz
+                { left: (canvas.width / 2 - 170) + 'px', top: (canvas.height - branchPositions[0].y - 100) + 'px' }, // Ríe
+                { right: (canvas.width / 2 - 190) + 'px', top: (canvas.height - branchPositions[0].y - 100) + 'px' }, // Canta
+                { left: (canvas.width / 2 - 170) + 'px', bottom: (canvas.height - branchPositions[0].y - 230) + 'px' }, // Viaja
+                { right: (canvas.width / 2 - 190) + 'px', bottom: (canvas.height - branchPositions[0].y - 230) + 'px' }, // Sueña
+                { left: (canvas.width / 2 - 80) + 'px', bottom: (canvas.height - branchPositions[0].y - 120) + 'px' }  // Y Sé Feliz
             ];
 
             const textElement = document.getElementById(texts[index]);
@@ -268,7 +283,8 @@
 
             if (index === 4) {
               textShown = true;
-              setTimeout(showYuuTitle, 3000); // Muestra el título de "Yuu" después de un tiempo
+              setTimeout(showYuuTitle, 3000); 
+              setTimeout(showYuuTitlexd, 3500);// Muestra el título de "Yuu" después de un tiempo
             }
 
         }
@@ -280,6 +296,13 @@
               yuuShown = true;
           }
         }
+        function showYuuTitlexd() {
+            if (!yuuShownxd) {
+                const yuuTitlex = document.getElementById('yuu-titlex');
+                yuuTitlex.style.display = 'block';
+                yuuShownxd = true;
+            }
+          }
 
         // Función para dibujar el tallo
         function drawTallo() {
