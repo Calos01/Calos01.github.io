@@ -4,454 +4,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="Stylesheet" href="style.css">
-    <title>Yuuwi</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-        canvas {
-            display: block;
-        }
-        /* Estilo del texto */
-        .text {
-          position: absolute;
-          color: #FF4081; /* Pink color similar to the Bravo! image */
-          font-size: 50px; /* Adjust size as needed */
-          font-family: 'Pacifico', cursive; /* A playful font like 'Lobster', but closer to 'Bravo!' */
-          text-shadow: 4px 4px 10px #39E8FB, 4px 4px 20px #FF4081; /* Create a similar shadow with layered colors */
-          display: none;
-          z-index: 10;
-        }
-        .textcanta {
-          position: absolute;
-          color: #ffc857; /* Pink color similar to the Bravo! image */
-          font-size: 50px; /* Adjust size as needed */
-          font-family: 'Pacifico', cursive; /* A playful font like 'Lobster', but closer to 'Bravo!' */
-          text-shadow: 4px 4px 10px #39E8FB, 4px 4px 20px #FF4081; /* Create a similar shadow with layered colors */
-          display: none;
-          z-index: 10;
-        }
-        .textviaja {
-          position: absolute;
-          color: #8ac926; /* Pink color similar to the Bravo! image */
-          font-size: 50px; /* Adjust size as needed */
-          font-family: 'Pacifico', cursive; /* A playful font like 'Lobster', but closer to 'Bravo!' */
-          text-shadow: 4px 4px 10px #39E8FB, 4px 4px 20px #FF4081; /* Create a similar shadow with layered colors */
-          display: none;
-          z-index: 10;
-        }
-        .textsuenia {
-          position: absolute;
-          color: #00bbf9; /* Pink color similar to the Bravo! image */
-          font-size: 50px; /* Adjust size as needed */
-          font-family: 'Pacifico', cursive; /* A playful font like 'Lobster', but closer to 'Bravo!' */
-          text-shadow: 4px 4px 10px #39E8FB, 4px 4px 20px #FF4081; /* Create a similar shadow with layered colors */
-          display: none;
-          z-index: 10;
-        }
-        .textfeliz {
-          position: absolute;
-          color: #ffa200; /* Pink color similar to the Bravo! image */
-          font-size: 60px; /* Adjust size as needed */
-          font-family: 'Pacifico', cursive; /* A playful font like 'Lobster', but closer to 'Bravo!' */
-          text-shadow: 4px 4px 10px #39E8FB, 4px 4px 20px #FF4081; /* Create a similar shadow with layered colors */
-          display: none;
-          z-index: 10;
-        }
-        /* Estilo del título "Yuu" */
-        #yuu-title {
-          position: absolute;
-          color: #fff;
-          font-size: 80px;
-          font-family: 'Pacifico', cursive;
-          text-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500, 0 0 30px #FFFF00;
-          letter-spacing: 8px;
-          top: 20px;
-          left: 50%;
-          transform: translateX(-50%);
-          display: none;
-        }
-    </style>
+    <title>For Yuu</title>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
-    <div id="text-rie" class="text">Ríe</div>
-    <div id="text-canta" class="textcanta">Canta</div>
-    <div id="text-viaja" class="textviaja">Viaja</div>
-    <div id="text-suenia" class="textsuenia">Sueña</div>
-    <div id="text-feliz" class="textfeliz">Y Sé Feliz :)</div>
-    <div id="yuu-title">Yuu 🤗XD</div>
-
-    <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const numberOfPetals = 15;
-        const petalLength = 120;
-        const petalWidth = 40;
-        const petalColor = '#FFD700'; // Color amarillo del girasol
-        const centerColor = '#FFA500'; // Color del centro del girasol
-        const maxScale = 0.3; // Tamaño máximo que puede alcanzar un girasol
-        const sunflowers = [];
-        const bees = [];
-
-        const beeColors = ['#f15bb5', '#ffc857', '#8ac926', '#00bbf9', '#ffa200']; // Diferentes colores para las abejas
-        const arrivalDelays = [2500, 4000, 6000, 6500, 13000]; // Tiempos de llegada en milisegundos
-        let textShown = false;
-        let yuuShown = false;
-
-        let talloHeight = 0;
-        const maxTalloHeight = canvas.height * 0.5; // Altura máxima del tallo principal
-        const talloGrowthSpeed = 2; // Velocidad de crecimiento del tallo
-
-        const branchPositions = [];
-        const branchGrowthSpeed = 0.5;
-        let branchesGrown = 0; // Contador de ramas que han crecido
-
-        let sunflowerGrown = false; // Verifica si los girasoles ya han crecido
-        let topSunflowerGrown = false; // Verifica si el girasol de arriba ha crecido
-
-        // Inicialización de las abejas con demoras en movimiento
-        function initBees() {
-            const beeTargets = [
-                { x: canvas.width / 2 - 100, y: canvas.height - branchPositions[0].y - 50 }, // Girasol izquierdo
-                { x: canvas.width / 2 + 100, y: canvas.height - branchPositions[0].y - 50 }, // Girasol derecho
-                { x: canvas.width / 2 - 100, y: canvas.height - branchPositions[1].y - 50 }, // Girasol izquierdo inferior
-                { x: canvas.width / 2 + 100, y: canvas.height - branchPositions[1].y - 50 }, // Girasol derecho inferior
-                { x: canvas.width / 2, y: canvas.height - maxTalloHeight - 45 } // Girasol central
-            ];
-
-            for (let i = 0; i < 5; i++) {
-                // Iniciar las abejas en los bordes superior, izquierdo o derecho
-                let xPos, yPos;
-                if (Math.random() > 0.5) {
-                    // Lado izquierdo o derecho
-                    xPos = Math.random() > 0.5 ? 0 : canvas.width;
-                    yPos = Math.random() * (canvas.height * 0.5); // Limitar al área superior
-                } else {
-                    // Borde superior
-                    xPos = Math.random() * canvas.width;
-                    yPos = 0;
-                }
-
-                bees.push({
-                    x: xPos,
-                    y: yPos,
-                    size: 20,
-                    color: beeColors[i],
-                    targetX: beeTargets[i].x,
-                    targetY: beeTargets[i].y,
-                    speed: 2,
-                    movingToFlower: false, // Comenzarán a moverse después de un tiempo
-                    directionX: Math.random() * 4 - 2, // Movimiento aleatorio
-                    directionY: Math.random() * 4 - 2,
-                    arrived: false
-                });
-                if(i==4 && bees[0].movingToFlower && bees[1].movingToFlower && bees[2].movingToFlower && bees[3].movingToFlower){
-                    setTimeout(() => {                  
-                      bees[i].movingToFlower = true;
-                    }, arrivalDelays[i]);
-                }else{
-                  // Demora en la llegada de las abejas
-                    setTimeout(() => {                  
-                      bees[i].movingToFlower = true;
-                    }, arrivalDelays[i]);
-                }
-                
-            }
-        }
-
-        // Función para dibujar las abejas con diferentes colores
-        function drawBee(bee) {
-            // Cuerpo de la abeja
-            ctx.save();
-            ctx.translate(bee.x, bee.y);
-            ctx.fillStyle = bee.color;
-            ctx.beginPath();
-            ctx.arc(0, 0, bee.size, 0, Math.PI * 2);
-            ctx.fill();
-
-            // Ojos
-            ctx.fillStyle = 'black';
-            ctx.beginPath();
-            ctx.arc(-5, -5, 3, 0, Math.PI * 2); // Ojo izquierdo
-            ctx.arc(5, -5, 3, 0, Math.PI * 2); // Ojo derecho
-            ctx.fill();
-
-            // Boca
-            ctx.beginPath();
-            ctx.arc(0, 5, 5, 0, Math.PI, false); // Sonrisa
-            ctx.strokeStyle = 'black';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-
-            // Antenas
-            ctx.beginPath();
-            ctx.moveTo(-7, -10); // Antena izquierda
-            ctx.lineTo(-10, -20);
-            ctx.moveTo(7, -10);  // Antena derecha
-            ctx.lineTo(10, -20);
-            ctx.strokeStyle = 'black';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            ctx.restore();
-
-            // Dibujar alas
-            ctx.beginPath();
-            ctx.ellipse(bee.x - 10, bee.y - 15, 10, 5, 0, 0, Math.PI * 2);
-            ctx.ellipse(bee.x + 10, bee.y - 15, 10, 5, 0, 0, Math.PI * 2);
-            ctx.fillStyle = '#FFF';
-            ctx.fill();
-        }
-
-        // Movimiento aleatorio de las abejas por los bordes
-        function moveBee(bee, index) {
-            if (!bee.movingToFlower) {
-                bee.x += bee.directionX;
-                bee.y += bee.directionY;
-
-                // Limitar el movimiento a los bordes (izquierda, derecha, superior)
-                if (bee.x <= 0 || bee.x >= canvas.width) bee.directionX *= -1;
-                if (bee.y <= 0 || bee.y >= canvas.height * 0.5) bee.directionY *= -1;
-
-            }
-             else {
-                // Mover hacia el girasol una vez que la abeja comience su vuelo al objetivo
-                const dx = bee.targetX - bee.x;
-                const dy = bee.targetY - bee.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance > 1) {
-                    bee.x += (dx / distance) * bee.speed;
-                    bee.y += (dy / distance) * bee.speed;
-                }
-                
-                else {
-                    bee.arrived = true;                    
-                    if (!textShown && bee.arrived) {
-                        showText(index); // Mostrar el texto correspondiente
-                    }
-                }
-            }
-        }
-
-        // Función para mostrar el texto basado en el índice de la abeja
-        function showText(index) {
-            const texts = ['text-rie', 'text-canta', 'text-viaja', 'text-suenia', 'text-feliz'];
-            const positions = [
-                { left: (canvas.width / 2 - 220) + 'px', top: (canvas.height - branchPositions[0].y - 100) + 'px' }, // Ríe
-                { right: (canvas.width / 2 - 260) + 'px', top: (canvas.height - branchPositions[0].y - 100) + 'px' }, // Canta
-                { left: (canvas.width / 2 - 250) + 'px', bottom: (canvas.height - branchPositions[0].y - 230) + 'px' }, // Viaja
-                { right: (canvas.width / 2 - 250) + 'px', bottom: (canvas.height - branchPositions[0].y - 230) + 'px' }, // Sueña
-                { left: (canvas.width / 2 - 150) + 'px', bottom: (canvas.height - branchPositions[0].y - 120) + 'px' }  // Y Sé Feliz
-            ];
-
-            const textElement = document.getElementById(texts[index]);
-            textElement.style.left = positions[index].left || 'auto';
-            textElement.style.right = positions[index].right || 'auto';
-            textElement.style.top = positions[index].top || 'auto';
-            textElement.style.bottom = positions[index].bottom || 'auto';
-            textElement.style.display = 'block';
-
-            if (index === 4) {
-              textShown = true;
-              setTimeout(showYuuTitle, 3000); // Muestra el título de "Yuu" después de un tiempo
-            }
-
-        }
-         // Función para mostrar el título "Yuu"
-        function showYuuTitle() {
-          if (!yuuShown) {
-              const yuuTitle = document.getElementById('yuu-title');
-              yuuTitle.style.display = 'block';
-              yuuShown = true;
-          }
-        }
-
-        // Función para dibujar el tallo
-        function drawTallo() {
-            ctx.beginPath();
-            ctx.moveTo(canvas.width / 2, canvas.height);
-            ctx.lineTo(canvas.width / 2, canvas.height - talloHeight);
-            ctx.strokeStyle = '#228B22'; // Verde del tallo
-            ctx.lineWidth = 10;
-            ctx.stroke();
-        }
-
-        // Función para dibujar una rama que crece lentamente
-        function drawBranch(branchY, branchProgress) {
-            const branchLength = branchProgress; // El crecimiento de la rama se ajusta a `branchProgress`
-            const branchX = canvas.width / 2;
-            const branchPosY = canvas.height - branchY;
-
-            // Dibujar rama hacia la izquierda
-            ctx.beginPath();
-            ctx.moveTo(branchX, branchPosY);
-            ctx.lineTo(branchX - branchLength, branchPosY - 50);
-            ctx.strokeStyle = '#228B22'; // Color verde para la rama
-            ctx.lineWidth = 6;
-            ctx.stroke();
-
-            // Dibujar rama hacia la derecha
-            ctx.beginPath();
-            ctx.moveTo(branchX, branchPosY);
-            ctx.lineTo(branchX + branchLength, branchPosY - 50);
-            ctx.stroke();
-        }
-
-        // Función para dibujar un pétalo
-        function drawPetal(x, y, angle, scale) {
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.scale(scale, scale); // Escalado para hacer que los girasoles crezcan
-            ctx.rotate(angle);
-            ctx.beginPath();
-            ctx.ellipse(0, petalLength / 2, petalWidth, petalLength, 0, 0, Math.PI * 2);
-            ctx.fillStyle = petalColor;
-            ctx.shadowBlur = 20;
-            ctx.shadowColor = '#FFFF00'; // Brillo amarillo
-            ctx.fill();
-            ctx.restore();
-        }
-
-        // Dibujar el centro del girasol
-        function drawCenter(x, y, scale) {
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.scale(scale, scale); // Escalado para hacer que los centros crezcan
-            ctx.beginPath();
-            ctx.arc(0, 0, 50, 0, Math.PI * 2);
-            ctx.fillStyle = centerColor;
-            ctx.shadowBlur = 30;
-            ctx.shadowColor = '#FFA500'; // Brillo naranja
-            ctx.fill();
-            ctx.restore();
-        }
-
-        // Animación de crecimiento y rotación de los pétalos
-        class Sunflower {
-            constructor(x, y) {
-                this.x = x;
-                this.y = y;
-                this.scale = 0.1; // Empieza pequeño
-                this.angleOffset = 0;
-                this.growthSpeed = Math.random() * 0.02 + 0.01; // Velocidad de crecimiento aleatoria
-            }
-
-            update() {
-                // Crece hasta que alcanza el tamaño máximo
-                if (this.scale < maxScale) {
-                    this.scale += this.growthSpeed;
-                }
-                this.angleOffset += 0.01; // Ajusta la rotación
-            }
-
-            draw() {
-                for (let i = 0; i < numberOfPetals; i++) {
-                    const angle = (i * Math.PI * 2 / numberOfPetals) + this.angleOffset;
-                    drawPetal(this.x, this.y, angle, this.scale);
-                }
-                drawCenter(this.x, this.y, this.scale);
-            }
-        }
-
-        // Crear las posiciones donde aparecerán las 2 ramas a lo largo del tallo
-        function setupBranches() {
-            const separationFactor = 0.4; // Factor de separación ajustado
-            for (let i = 0; i < 2; i++) { // Solo 2 ramas
-                const branchY = (maxTalloHeight * separationFactor) * (i + 1); // Ajuste de la posición de las ramas
-                branchPositions.push({
-                    y: branchY,
-                    progress: 0, // Progreso del crecimiento de la rama
-                    grown: false // Si la rama ha crecido completamente
-                });
-            }
-        }
-
-        // Crear girasoles una vez que las ramas estén listas
-        function createSunflowers() {
-            branchPositions.forEach(branch => {
-                sunflowers.push(new Sunflower(canvas.width / 2 - 100, canvas.height - branch.y - 50)); // Girasol izquierdo
-                sunflowers.push(new Sunflower(canvas.width / 2 + 100, canvas.height - branch.y - 50)); // Girasol derecho
-            });
-            sunflowerGrown = true; // Marcar que los girasoles han crecido
-        }
-
-        // Crear el girasol en la parte superior del tallo
-        function createTopSunflower() {
-            const topSunflower = new Sunflower(canvas.width / 2, canvas.height - maxTalloHeight - 45);
-            sunflowers.push(topSunflower);
-            topSunflowerGrown = true; // Marcar que el girasol de arriba ha crecido
-        }
-
-        // Dibujar y actualizar el tallo, ramas y girasoles
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            // Dibujar el tallo mientras crece
-            if (talloHeight < maxTalloHeight) {
-                talloHeight += talloGrowthSpeed;
-            }
-            drawTallo();
-
-            // Dibujar ramas a medida que crecen con el tallo
-            branchPositions.forEach((branch, index) => {
-                if (talloHeight >= branch.y) { // Cuando el tallo alcanza la altura de la rama
-                    if (branch.progress < 100) { // Si la rama aún no está completamente crecida
-                        branch.progress += branchGrowthSpeed; // Crece la rama
-                    } else {
-                        branch.grown = true; // Marcar la rama como crecida
-                    }
-                    drawBranch(branch.y, branch.progress);
-                }
-            });
-
-            // Si todas las ramas han crecido y los girasoles no han comenzado a crecer, iniciar su crecimiento
-            if (branchPositions.every(branch => branch.grown) && !sunflowerGrown) {
-                createSunflowers();
-            }
-
-            // Crear el girasol en la parte superior después de que las ramas han crecido
-            if (branchPositions.every(branch => branch.grown) && !topSunflowerGrown) {
-                createTopSunflower();
-            }
-
-            // Dibujar y actualizar los girasoles
-            if (sunflowerGrown || topSunflowerGrown) {
-                sunflowers.forEach(sunflower => {
-                    sunflower.update();
-                    sunflower.draw();
-                });
-            }
-
-            // Mover las abejas y dibujarlas
-            bees.forEach((bee, index) => {
-                moveBee(bee, index);
-                drawBee(bee);
-            });
-
-            requestAnimationFrame(animate);
-        }
-
-        // Configurar ramas iniciales
-        setupBranches();
-
-        // Iniciar abejas y animación
-        initBees();
-        animate();
-    </script>
+  <div id="container">
+<div class="rain"></div>
+<div class="flower">
+  
+    <div class="text-above">Feliz San Volantín XD!</div>
+    <div class="mid">
+    </div>
+    <div class="Petal1 p1">
+    </div>
+    <div class="Petal1 p2">
+    </div>
+    <div class="Petal1 p3">
+    </div>
+    <div class="Petal1 p4">
+    </div>
+    <div class="Petal2 p1">
+    </div>
+    <div class="Petal2 p2">
+    </div>
+    <div class="Petal2 p3">
+    </div>
+    <div class="Petal2 p4">
+    </div>
+    <div class="Petal3 p1">
+    </div>
+    <div class="Petal3 p2">
+    </div>
+    <div class="Petal3 p3">
+    </div>
+    <div class="Petal3 p4">
+    </div>
+    <!-- <div class="text-below"></div> -->
+  </div>
+    <div id="butterfly"></div>
+  </div>
+  <div>
+    <h1 class="glow-text">Yuu</h1>
+    <span style="color: rgb(16, 244, 244); margin-left: -50px;">Abrir Regalito</span>
+    <img id="imagen-clickable" src="images/regalo.png" alt="Imagen Clickable" width="50">
+  </div>
+  <script src="script.js"></script>
+  <script>
+    // Agrega un manejador de eventos de clic a la imagen
+    document.getElementById('imagen-clickable').addEventListener('click', function() {
+      // Abre el primer HTML en una nueva ventana
+      window.open('index2.html', '_blank');
+    });
+  </script>
 </body>
+<footer>
+  
+</footer>
 </html>
